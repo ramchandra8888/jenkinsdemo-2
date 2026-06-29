@@ -99,3 +99,85 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        .stage-status {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .stage-time {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        /* Status Modifiers */
+        .status-success { border-color: var(--success); }
+        .status-success .stage-status { background-color: rgba(46, 196, 182, 0.2); color: var(--success); }
+
+        .status-building { border-color: var(--building); animation: pulse 2s infinite; }
+        .status-building .stage-status { background-color: rgba(58, 134, 255, 0.2); color: var(--building); }
+
+        .status-failed { border-color: var(--failed); }
+        .status-failed .stage-status { background-color: rgba(230, 57, 70, 0.2); color: var(--failed); }
+
+        .status-skipped { border-color: var(--skipped); opacity: 0.6; }
+        .status-skipped .stage-status { background-color: rgba(141, 153, 174, 0.2); color: var(--skipped); }
+
+        /* Progress animation for building stage */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(58, 134, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(58, 134, 255, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pipeline-container">
+        <div class="pipeline-header">
+            <h2>production-deployment-pipeline #42</h2>
+            <div class="pipeline-meta">
+                Started by user <strong>DevOps_Admin</strong> &bull; Commit: <code style="color: #f1faee;">a1b2c3d</code> &bull; Duration: 4m 32s
+            </div>
+        </div>
+
+        <div class="pipeline-flow">
+            <div class="stage status-success">
+                <div class="stage-name">Checkout</div>
+                <div class="stage-status">Success</div>
+                <div class="stage-time">12s</div>
+            </div>
+
+            <div class="stage status-success">
+                <div class="stage-name">Code Lint & Test</div>
+                <div class="stage-status">Success</div>
+                <div class="stage-time">1m 45s</div>
+            </div>
+
+            <div class="stage status-success">
+                <div class="stage-name">Build Image</div>
+                <div class="stage-status">Success</div>
+                <div class="stage-time">2m 10s</div>
+            </div>
+
+            <div class="stage status-building">
+                <div class="stage-name">Staging Deploy</div>
+                <div class="stage-status">Building</div>
+                <div class="stage-time">25s...</div>
+            </div>
+
+            <div class="stage status-skipped">
+                <div class="stage-name">Prod Deploy</div>
+                <div class="stage-status">Pending</div>
+                <div class="stage-time">--</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
